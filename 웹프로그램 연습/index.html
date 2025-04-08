@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>VOIDLINE - 스트릿 감성 의류</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+            nav a {
+                color: white;
+                margin: 0 15px;
+                text-decoration: none;
+            }
+
+                nav a:hover {
+                    text-decoration: underline;
+                }
+
+        #welcome {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .product {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+            .product h2 {
+                margin-bottom: 20px;
+            }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        select, input[type="submit"] {
+            padding: 10px;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>VOIDLINE</h1>
+        <p>스트릿 감성 의류 브랜드</p>
+        <div id="welcome"></div>
+    </header>
+
+    <nav>
+        <a href="index.html">홈</a>
+        <a href="#">상품</a>
+        <a href="signup.html">회원가입</a>
+        <a href="login.html">로그인</a>
+    </nav>
+
+    <div class="product">
+        <h2>티셔츠 구매</h2>
+        <form>
+            <label for="size">사이즈 선택</label>
+            <select id="size" name="size">
+                <option value="S">Small (S)</option>
+                <option value="M">Medium (M)</option>
+                <option value="L">Large (L)</option>
+                <option value="XL">Extra Large (XL)</option>
+            </select>
+
+            <label for="color">색상 선택</label>
+            <select id="color" name="color">
+                <option value="black">블랙</option>
+                <option value="white">화이트</option>
+                <option value="gray">그레이</option>
+                <option value="navy">네이비</option>
+            </select>
+
+            <input type="submit" value="구매하기">
+        </form>
+    </div>
+
+    <footer>
+        © 2025 VOIDLINE. All rights reserved.
+    </footer>
+
+    <script>
+        // 로그인 후 사용자 이름 받아오기
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get("name");
+
+        if (name) {
+            document.getElementById("welcome").innerHTML = `<p>${name}님 환영합니다!</p>`;
+        }
+    </script>
+
+</body>
+</html>
