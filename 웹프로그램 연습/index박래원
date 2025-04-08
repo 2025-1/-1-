@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>우신사</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+            nav a {
+                color: white;
+                margin: 0 15px;
+                text-decoration: none;
+            }
+
+                nav a:hover {
+                    text-decoration: underline;
+                }
+
+        #welcome {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .product {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+            .product h2 {
+                margin-bottom: 20px;
+            }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        select, input[type="submit"] {
+            padding: 10px;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>우신사</h1>
+        <div id="welcome"></div>
+    </header>
+
+    <nav>
+        <a href="index.html">홈</a>
+        <a href="#">상품</a>
+        <a href="signup.html">회원가입</a>
+        <a href="login.html">로그인</a>
+    </nav>
+
+
+    <script>
+        // 로그인 후 사용자 이름 받아오기
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get("name");
+
+        if (name) {
+            document.getElementById("welcome").innerHTML = `<p>${name}님 환영합니다!</p>`;
+        }
+    </script>
+
+</body>
+</html>
+    <!-- 상품 영역 -->
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+       <div style="width: 280px; border: 1px solid #ccc; background: #fff; padding: 15px;">
+            <img src="https://via.placeholder.com/280x280?text=티셔츠" alt="티셔츠" style="width: 100%; filter: grayscale(100%);">
+            <h2 style="font-size: 1.2em; margin: 10px 0 5px;">스트릿 반팔 티셔츠</h2>
+            <p style="font-size: 0.9em;">사이즈 선택: S / M / L / XL<br>색상 선택: 블랙 / 화이트 / 그레이 / 레드</p>
+            <p><strong>가격: ₩300,000</strong></p>
+
+            <form action="#" method="post">
+                사이즈:
+                <input type="text" size="12" list="size-list" /><br><br>
+                <datalist id="size-list">
+                    <option value="S" />
+                    <option value="M" />
+                    <option value="L" />
+                    <option value="XL" />
+                </datalist>
+
+                색상:
+                <input type="text" size="12" list="color-list" /><br><br>
+                <datalist id="color-list">
+                    <option value="블랙" />
+                    <option value="화이트" />
+                    <option value="그레이" />
+                    <option value="레드" />
+                </datalist>
+
+                <input type="submit" value="₩300,000 - 구매하기" style="width: 100%; padding: 10px; background: none; border: 1px solid #333; font-family: inherit; cursor: pointer;">
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
