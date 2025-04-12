@@ -34,11 +34,6 @@
                     text-decoration: underline;
                 }
 
-        #welcome {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
         .container {
             display: flex;
             align-items: flex-start;
@@ -68,6 +63,12 @@
                 font-size: 28px;
                 margin-bottom: 20px;
                 color: #333;
+            }
+
+            .text-box label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
             }
 
             .text-box select {
@@ -108,6 +109,13 @@
             text-align: center;
             padding: 15px;
         }
+
+        .price {
+            font-size: 20px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -117,7 +125,7 @@
     </header>
 
     <nav>
-        <a href="main.html">홈</a>
+        <a href="index.html">홈</a>
         <a href="login.html">로그인</a>
         <a href="signup.html">회원가입</a>
     </nav>
@@ -127,19 +135,24 @@
         <div class="text-box">
             <h2>긴팔</h2>
 
-            <select name="color" required>
+            <label for="color">색상</label>
+            <select name="color" id="color" required>
                 <option value="">-- 색상을 선택하세요 --</option>
-                <option value="white">화이트</option>
                 <option value="black">블랙</option>
+                <option value="white">화이트</option>
+                <option value="gray">그레이</option>
             </select>
 
-            <select name="size" required>
+            <label for="size">사이즈</label>
+            <select name="size" id="size" required>
                 <option value="">-- 사이즈를 선택하세요 --</option>
                 <option value="small">S</option>
                 <option value="mid">M</option>
                 <option value="large">L</option>
                 <option value="xlarge">XL</option>
             </select>
+
+            <div class="price" id="price">가격: 0원</div>
 
             <div class="button-group">
                 <button onclick="buyNow()">구매하기</button>
@@ -149,10 +162,36 @@
         </div>
     </div>
 
+    <footer>
+        ⓒ 2025 WOOSINSA. All rights reserved.
+    </footer>
+
     <script>
+        const prices = {
+            black: { small: 15000, mid: 16000, large: 17000, xlarge: 18000 },
+            white: { small: 14000, mid: 15000, large: 16000, xlarge: 17000 },
+            gray: { small: 14500, mid: 15500, large: 16500, xlarge: 17500 }
+        };
+
+        function updatePrice() {
+            const color = document.querySelector('#color').value;
+            const size = document.querySelector('#size').value;
+            const priceElement = document.querySelector('#price');
+
+            if (color && size) {
+                const price = prices[color][size];
+                priceElement.textContent = `가격: ${price.toLocaleString()}원`;
+            } else {
+                priceElement.textContent = '가격: 0원';
+            }
+        }
+
+        document.querySelector('#color').addEventListener('change', updatePrice);
+        document.querySelector('#size').addEventListener('change', updatePrice);
+
         function buyNow() {
-            const color = document.querySelector('select[name="color"]').value;
-            const size = document.querySelector('select[name="size"]').value;
+            const color = document.querySelector('#color').value;
+            const size = document.querySelector('#size').value;
 
             if (!color || !size) {
                 alert("색상과 사이즈를 모두 선택해주세요!");
@@ -168,8 +207,8 @@
         }
 
         function addToCart() {
-            const color = document.querySelector('select[name="color"]').value;
-            const size = document.querySelector('select[name="size"]').value;
+            const color = document.querySelector('#color').value;
+            const size = document.querySelector('#size').value;
 
             if (!color || !size) {
                 alert("색상과 사이즈를 선택 후 장바구니에 담아주세요!");
@@ -180,8 +219,8 @@
         }
 
         function present() {
-            const color = document.querySelector('select[name="color"]').value;
-            const size = document.querySelector('select[name="size"]').value;
+            const color = document.querySelector('#color').value;
+            const size = document.querySelector('#size').value;
 
             if (!color || !size) {
                 alert("색상과 사이즈를 모두 선택해주세요!");
@@ -189,11 +228,8 @@
             }
 
             const recipient = prompt("선물할 친구의 이메일을 입력하세요:");
-
-            // 이메일 형식 확인 정규식
             const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-            // 이메일 형식이 맞는지 확인
             if (recipient && emailPattern.test(recipient)) {
                 alert(`${recipient} 이메일로 선물이 전송되었습니다!`);
             } else if (recipient) {
@@ -203,5 +239,7 @@
             }
         }
     </script>
+
 </body>
 </html>
+
