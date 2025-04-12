@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>우신사 - 후드 상품 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+            nav a {
+                color: white;
+                margin: 0 15px;
+                text-decoration: none;
+            }
+
+                nav a:hover {
+                    text-decoration: underline;
+                }
+
+        .container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 40px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+            .container img {
+                width: 400px;
+                height: auto;
+                border-radius: 10px;
+                object-fit: cover;
+            }
+
+        .text-box {
+            max-width: 400px;
+            width: 100%;
+        }
+
+            .text-box h2 {
+                font-size: 28px;
+                margin-bottom: 20px;
+                color: #333;
+            }
+
+            .text-box label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            .text-box select {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+            }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .text-box button {
+            flex: 1;
+            padding: 12px 0;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            color: #fff;
+            background-color: #333;
+        }
+
+            .text-box button:hover {
+                opacity: 0.85;
+            }
+
+        footer {
+            margin-top: 50px;
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .price {
+            font-size: 20px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>WOOSINSA</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">홈</a>
+        <a href="login.html">로그인</a>
+        <a href="signup.html">회원가입</a>
+    </nav>
+
+    <div class="container">
+        <img src="후드-메인.png" alt="후드 이미지">
+        <div class="text-box">
+            <h2>후드</h2>
+
+            <label for="color">색상</label>
+            <select name="color" id="color" required>
+                <option value="">-- 색상을 선택하세요 --</option>
+                <option value="gray">그레이</option>
+                <option value="darkgray">다크그레이</option>
+                <option value="red">레드</option>
+                <option value="black">블랙</option>
+                <option value="oatmeal">오트밀</option>
+                <option value="olive">올리브</option>
+            </select>
+
+            <label for="size">사이즈</label>
+            <select name="size" id="size" required>
+                <option value="">-- 사이즈를 선택하세요 --</option>
+                <option value="small">S</option>
+                <option value="mid">M</option>
+                <option value="large">L</option>
+                <option value="xlarge">XL</option>
+            </select>
+
+            <div class="price" id="price">가격: 0원</div>
+
+            <div class="button-group">
+                <button onclick="buyNow()">구매하기</button>
+                <button onclick="addToCart()">장바구니</button>
+                <button onclick="present()">선물하기</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        ⓒ 2025 WOOSINSA. All rights reserved.
+    </footer>
+
+    <script>
+    const prices = {
+        gray: { small: 25000, mid: 26000, large: 27000, xlarge: 28000 },
+        darkgray: { small: 25500, mid: 26500, large: 27500, xlarge: 28500 },
+        red: { small: 26000, mid: 27000, large: 28000, xlarge: 29000 },
+        black: { small: 26500, mid: 27500, large: 28500, xlarge: 29500 },
+        oatmeal: { small: 27000, mid: 28000, large: 29000, xlarge: 30000 },
+        olive: { small: 27500, mid: 28500, large: 29500, xlarge: 30500 }
+    };
+
+    function updatePrice() {
+        const color = document.querySelector('#color').value;
+        const size = document.querySelector('#size').value;
+        const priceElement = document.querySelector('#price');
+
+        if (color && size) {
+            const price = prices[color][size];
+            priceElement.textContent = `가격: ${price.toLocaleString()}원`;
+        } else {
+            priceElement.textContent = '가격: 0원';
+        }
+    }
+
+    document.querySelector('#color').addEventListener('change', updatePrice);
+    document.querySelector('#size').addEventListener('change', updatePrice);
+
+    function buyNow() {
+        const color = document.querySelector('#color').value;
+        const size = document.querySelector('#size').value;
+
+        if (!color || !size) {
+            alert("색상과 사이즈를 모두 선택해주세요!");
+            return;
+        }
+
+        const result = confirm("구매하시겠습니까?");
+        if (result) {
+            alert("구매가 완료되었습니다!");
+        } else {
+            alert("구매가 취소되었습니다.");
+        }
+    }
+
+    function addToCart() {
+        const color = document.querySelector('#color').value;
+        const size = document.querySelector('#size').value;
+
+        if (!color || !size) {
+            alert("색상과 사이즈를 선택 후 장바구니에 담아주세요!");
+            return;
+        }
+
+        alert("장바구니에 상품을 담았습니다!");
+    }
+
+    function present() {
+        const color = document.querySelector('#color').value;
+        const size = document.querySelector('#size').value;
+
+        if (!color || !size) {
+            alert("색상과 사이즈를 모두 선택해주세요!");
+            return;
+        }
+
+        const recipient = prompt("선물할 친구의 이메일을 입력하세요:");
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+        if (recipient && emailPattern.test(recipient)) {
+            alert(`${recipient} 이메일로 선물이 전송되었습니다!`);
+        } else if (recipient) {
+            alert("올바른 이메일 주소를 입력해주세요.");
+        } else {
+            alert("선물하기가 취소되었습니다.");
+        }
+    }
+    </script>
+
+</body>
+</html>
