@@ -84,6 +84,89 @@
         <a href="login.html">로그인</a>
         <a href="signup.html">회원가입</a>
     </nav>
+    <div class="container">
+        <img src="반팔-메인.png" alt="반팔 이미지">
+        <div class="text-box">
+            <h2>긴팔</h2>
 
+            <select name="color" required>
+                <option value="">-- 색상을 선택하세요 --</option>
+                <option value="white">화이트</option>
+                <option value="black">블랙</option>
+                <option value="blue">블루</option>
+                <option value="yellow">옐로우</option>
+                <option value="red">레드</option>
+            </select>
+
+            <select name="size" required>
+                <option value="">-- 사이즈를 선택하세요 --</option>
+                <option value="small">S</option>
+                <option value="mid">M</option>
+                <option value="large">L</option>
+                <option value="xlarge">XL</option>
+            </select>
+
+            <div class="button-group">
+                <button onclick="buyNow()">구매하기</button>
+                <button onclick="addToCart()">장바구니</button>
+                <button onclick="present()">선물하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function buyNow() {
+            const color = document.querySelector('select[name="color"]').value;
+            const size = document.querySelector('select[name="size"]').value;
+
+            if (!color || !size) {
+                alert("색상과 사이즈를 모두 선택해주세요!");
+                return;
+            }
+
+            const result = confirm("구매하시겠습니까?");
+            if (result) {
+                alert("구매가 완료되었습니다!");
+            } else {
+                alert("구매가 취소되었습니다.");
+            }
+        }
+
+        function addToCart() {
+            const color = document.querySelector('select[name="color"]').value;
+            const size = document.querySelector('select[name="size"]').value;
+
+            if (!color || !size) {
+                alert("색상과 사이즈를 선택 후 장바구니에 담아주세요!");
+                return;
+            }
+
+            alert("장바구니에 상품을 담았습니다!");
+        }
+
+        function present() {
+            const color = document.querySelector('select[name="color"]').value;
+            const size = document.querySelector('select[name="size"]').value;
+
+            if (!color || !size) {
+                alert("색상과 사이즈를 모두 선택해주세요!");
+                return;
+            }
+
+            const recipient = prompt("선물할 친구의 이메일을 입력하세요:");
+
+            // 이메일 형식 확인 정규식
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+            // 이메일 형식이 맞는지 확인
+            if (recipient && emailPattern.test(recipient)) {
+                alert(`${recipient} 이메일로 선물이 전송되었습니다!`);
+            } else if (recipient) {
+                alert("올바른 이메일 주소를 입력해주세요.");
+            } else {
+                alert("선물하기가 취소되었습니다.");
+            }
+        }
+    </script>
 </body>
 </html>
