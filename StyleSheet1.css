@@ -1,0 +1,236 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 300px;
+    background: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+}
+
+    .logo {
+        height: 180px;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menu-container { 
+        flex: 1;
+        display: flex;
+        flex-direction: column; 
+    }
+
+    .menu {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        font-size: 20px;
+    }
+
+        .menu:hover {
+            background-color: #f0f8ff;
+            cursor: pointer;
+        }
+
+    .submenu {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 100%;
+        background: #ffffff;
+        flex-direction: row;
+        padding: 0 10px;
+        height: 100%; 
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 3000;
+    }
+
+        .submenu div {
+            margin: 0 10px;
+            padding: 8px 12px;
+            white-space: nowrap;
+        }
+
+    .menu:hover .submenu {
+        display: flex;
+    }
+    .submenu-wrapper {
+        position: absolute;
+        left: 300px;
+        top: 180px;
+        background: #f9f9f9;
+        display: none;
+        flex-direction: row;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 20px;
+        z-index: 3000;
+    }
+
+        .submenu-group {
+            display: flex;
+            flex-direction: column;
+            margin-right: 30px;
+        }
+
+            .submenu-group div {
+                padding: 8px 12px;
+                white-space: nowrap;
+            }
+
+    .menu:hover .submenu-wrapper {
+        display: flex;
+    }
+
+
+    .sns {
+        display: flex;
+        height: 70px;
+        background: #ffffff;
+        justify-content: center;
+        align-items: center;
+        gap: 60px; 
+    }
+
+        .sns a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px
+        }
+
+            .sns-item {
+                height: 30px; 
+                width: 30px; 
+                transition: transform 0.2s;
+            }
+
+                .sns-item:hover {
+                    transform: scale(1.1); 
+                }
+
+
+.main {
+    width: calc(100% - 300px);
+}
+
+topbar {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.sub {
+    height: 160px;
+    background: #ffffff;
+    /*border-bottom: 1px solid #ccc;  sub과 content 사이의 회색줄. 필요없을시 삭제*/
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 30px;
+    font-size: 50px;
+}
+
+    .sub span {
+        border-bottom: 3px solid #005826; /* 밑줄 */
+        padding-bottom: 5px; /* 텍스트와 밑줄 사이 간격 */
+    }
+
+    .floating-buttons {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+        z-index: 1000;
+        background: none; 
+        padding: 10px;
+        border-radius: 10px;
+        backdrop-filter: blur(1.5px); 
+    }
+    .search-toggle,
+    .login-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+        .search-toggle img,
+        .login-btn img {
+            width: 20px;
+            height: 20px;
+        }
+
+    .search {
+        position: absolute; 
+        top: 80px; 
+        right: 20px; 
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.2); 
+        display: none;
+        backdrop-filter: blur(5px);
+        padding: 8px 12px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+
+
+        .search input {
+            width: 600px;
+            padding: 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .search button {
+            padding: 12px;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+
+    .footer {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        font-size: 13px;
+    }
+
+    .flogo {
+        width: 200px;
+        height: auto;
+        margin-right: 70px;
+        margin-left: 30px;
+    }
+
+    .footer-text {
+        line-height: 1.8;
+    }
+

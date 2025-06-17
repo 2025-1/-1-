@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>자료실-취업정보</title>
+    <link rel="stylesheet" href="StyleSheet1.css">
+    <style>
+        .content {
+            padding: 30px 50px;
+            border-bottom: 1px solid #ccc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+            .content h1 {
+                font-size: 1.4em;
+                color: #003366;
+                margin-bottom: 20px;
+                border-bottom: 3px solid #003366;
+                padding-bottom: 10px;
+            }
+
+            .content img {
+                width: 100%;
+                height: auto;
+                display: block;
+                margin: 0 auto 30px auto; /* 가운데 정렬 + 아래 여백 */
+                border-radius: 8px;
+                
+            }
+
+            .content table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+                background-color: #fff;
+                overflow: hidden;
+                font-size: 0.95em;
+            }
+
+            .content th {
+                background: linear-gradient(90deg, #005baa, #0078d4);
+                color: white;
+                padding: 16px;
+                font-size: 1.1em;
+                text-align: center;
+            }
+
+            .content td {
+                padding: 14px 16px;
+                border-top: 1px solid #eee;
+                vertical-align: top;
+            }
+
+            .content strong {
+                color: #1a3d7c;
+                font-weight: bold;
+            }
+
+            .content tr:nth-child(even) td {
+                background-color: #F9F9F9;
+            }
+
+            .content td.divider {
+                border-bottom: 2px solid #2A3340; /* 원하는 색상으로 바꿔도 됨 */
+            }
+
+            .content ul {
+                margin: 0;
+                padding-left: 20px;
+            }
+
+
+                .content ul li {
+                    margin-bottom: 8px;
+                }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <img src="wsu_logo.png">
+
+            <div class="menu">
+                전공소개
+                <div class="submenu">
+                    <div>학부장 말씀</div>
+                    <div>전공 소개</div>
+                    <div>교수 소개</div>
+                    <div>관련 자격증</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                입학정보
+                <div class="submenu">
+                    <div>권장 도서</div>
+                    <div>입시 공지사항</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                커뮤니티
+                <div class="submenu">
+                    <div>최신 뉴스</div>
+                    <div>전공동아리</div>
+                    <div>공지사항</div>
+                    <div>학생 프로젝트</div>
+                    <div>익명게시판</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                자료실
+                <div class="submenu">
+                    <div>유학/인턴십</div>
+                    <div>졸업요건</div>
+                    <div>학사일정</div>
+                    <div>취업정보</div>
+                    <div>캠퍼스맵</div>
+                </div>
+            </div>
+
+            <div class="sns">
+                <a href="#" class="sns-item">
+                    <img src="insta_icon.png" alt="인스타">
+                </a>
+                <a href="#" class="sns-item">
+                    <img src="blog_icon.png" alt="블로그">
+                </a>
+                <a href="#" class="sns-item">
+                    <img src="youtube_icon.png" alt="유튜브">
+                </a>
+            </div>
+        </div>
+        <div class="main">
+            <div class="topbar">
+                <div class="sub"><span>취업정보</span></div>
+                <div class="floating-buttons">
+                    <button id="toggle-search" class="search-toggle">
+                        <img src="search.png" alt="검색">
+                    </button>
+                    <a href="#" class="login-btn">
+                        <img src="lock.png" alt="로그인">
+                    </a>
+                </div>
+                <div class="search" id="search-box">
+                    <input type="text" placeholder="검색어를 입력하세요">
+                    <button>검색</button>
+                </div>
+            </div>
+            <div class="content">
+
+                <h1>취업 교육 과정</h1>
+                <img src="취업교육과정.jpg" alt="취업교육과정">
+                <br>
+
+
+                <h1>커리큘럼 예시</h1>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><strong>.NET & Programming</strong></td>
+                            <td>
+                                <ul>
+                                    <li>.NET Framework</li>
+                                    <li>C# Language Fundamental : JAVA</li>
+                                    <li>Windows Form and WPF : Spring</li>
+                                    <li>ASP.NET, Silverlight : jsp</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="divider">Semi-Project : .NET Development</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DBMS</strong></td>
+                            <td>
+                                <ul>
+                                    <li>DBMS Fundamental</li>
+                                    <li>Oracle, MS SQL Architecture</li>
+                                    <li>DB Modeling</li>
+                                    <li>DB Administration</li>
+                                    <li>ADO.NET, Linq, XML, .net : JDBC</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="divider">Semi-Project : DB Design for Business Application</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Server Programming</strong></td>
+                            <td>
+                                <ul>
+                                    <li>.NET Remoting, Reflection, WCF 서비스</li>
+                                    <li>.NET Socket Programming</li>
+                                    <li>Big Data 운영 기술</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Final-Project : 산학협력 프로젝트</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="footer">
+                <img src="f_logo.png" class="flogo">
+                <div class="footer-text">
+                    (34606) 대전광역시 동구 동대전로 171 우송대학교 서캠퍼스 식품건축관(구.사회관)(W15) 202호<br>
+                    TEL 042.630.9850 / FAX 042-630-9719<br>
+                    COPYRIGHT 2020 WOOSONG UNIVERSITY ALL RIGHT RESERVED.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

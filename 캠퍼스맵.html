@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자료실-캠퍼스맵</title>
+    <link rel="stylesheet" href="StyleSheet1.css">
+    <style>
+        .content {
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            flex-direction: column; /* 위에서 아래로 배치 */
+            align-items: flex-start; /* 가로 왼쪽 정렬 */
+            justify-content: flex-start; /* 세로 위 정렬 */
+            padding: 20px;
+        }
+
+        .section.section_address.lst {
+            display: none !important;
+        }
+
+        #daumRoughmapContainer1749129174176 {
+            position: relative;
+            z-index: 0 !important;
+        }
+
+        .contact-info {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+            .contact-info h4 {
+                margin: 0 0 10px;
+                font-size: 18px;
+                color: #003366;
+            }
+
+            .contact-info .address,
+            .contact-info .phone {
+                margin: 4px 0;
+            }
+
+        .goto h4 {
+            font-size: 18px;
+            color: #003366;
+        }
+
+        .tab-btn {
+            padding: 8px 40px;
+            border: 1px solid #ccc;
+            background: white;
+            color: #003366;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+            font-weight: normal;
+        }
+
+            .tab-btn:hover {
+                background-color: #f0f0f0;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .tab-btn.active {
+                background: #f0f0f0;    /*버튼 눌렀을 때 배경색*/
+                color: #003366;
+                font-weight: bold;
+                border: 1px solid #999999;  /*테두리*/
+                box-shadow: 0 4px 6px rgba(100, 100, 100, 0.2); /*그림자*/
+            }
+
+        .tab-btn:not(.active):hover {
+            background-color: #f0f0f0;
+        }
+
+        .tab-content p {
+            margin-bottom: 16px;
+        }
+        .route-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .route-tab-btn {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background-color: white;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+            .route-tab-btn:hover {
+                background-color: #f0f0f0;
+            }
+
+            .route-tab-btn.active {
+                background-color: #e0f0ff;
+                color: #007acc;
+                border-bottom: 3px solid #007acc;
+                font-weight: bold;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <img src="wsu_logo.png">
+
+            <div class="menu">
+                전공소개
+                <div class="submenu">
+                    <div>학부장 말씀</div>
+                    <div>전공 소개</div>
+                    <div>교수 소개</div>
+                    <div>관련 자격증</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                입학정보
+                <div class="submenu">
+                    <div>권장 도서</div>
+                    <div>입시 공지사항</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                커뮤니티
+                <div class="submenu">
+                    <div>최신 뉴스</div>
+                    <div>전공동아리</div>
+                    <div>공지사항</div>
+                    <div>학생 프로젝트</div>
+                    <div>익명게시판</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                자료실
+                <div class="submenu">
+                    <div>유학/인턴십</div>
+                    <div>졸업요건</div>
+                    <div>학사일정</div>
+                    <div>취업정보</div>
+                    <div>캠퍼스맵</div>
+                </div>
+            </div>
+
+            <div class="sns">
+                <a href="#" class="sns-item">
+                    <img src="insta_icon.png" alt="인스타">
+                </a>
+                <a href="#" class="sns-item">
+                    <img src="blog_icon.png" alt="블로그">
+                </a>
+                <a href="#" class="sns-item">
+                    <img src="youtube_icon.png" alt="유튜브">
+                </a>
+            </div>
+        </div>
+        
+        <div class="main">
+            <div class="topbar">
+                <div class="sub"><span>캠퍼스맵</span></div>
+                <div class="floating-buttons">
+                    <button id="toggle-search" class="search-toggle">
+                        <img src="search.png" alt="검색">
+                    </button>
+                    <a href="#" class="login-btn">
+                        <img src="lock.png" alt="로그인">
+                    </a>
+                </div>
+                <div class="search" id="search-box">
+                    <input type="text" placeholder="검색어를 입력하세요">
+                    <button>검색</button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <br>
+                <!-- * 카카오맵 - 지도퍼가기 -->
+                <!-- 1. 지도 노드 -->
+                <div id="daumRoughmapContainer1749129174176" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+                <!--
+        2. 설치 스크립트
+        * 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+    -->
+                <script class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+                <!-- 3. 실행 스크립트 -->
+                <script charset="UTF-8">
+                    new daum.roughmap.Lander({
+                        "timestamp": "1749129174176",
+                        "key": "32n6bevuwqp",
+                        "mapWidth": "960",
+                        "mapHeight": "450"
+                    }).render();
+                </script>
+                
+                <br>
+                <div class="contact-info">
+                    <h4>우송대학교 서캠퍼스</h4>
+                    <p class="address">대전광역시 동구 동대전로 171 (34606), 식품건축관(W15) 202호</p>
+                    <p class="phone">전화: 042-630-9850 / 팩스: 042-630-9719</p>
+                </div>
+                <br>
+                <div class="goto">
+                    <h4>찾아오는 방법</h4>
+                </div>
+                <br>
+                <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                    <button class="tab-btn active" data-tab="highway">고속도로</button>
+                    <button class="tab-btn" data-tab="bus">대중교통</button>
+                </div>
+
+                <div id="highway" class="tab-content" style="display:block; line-height: 1.6;">
+                    <p>
+                        <strong>대전 IC 경로:</strong><br>
+                        대전 IC출구 → 자양로 동부네거리에서 좌회전 → 자양로 가양네거리에서 직진 → 우송대학교 서 캠퍼스
+                    </p>
+                    <p>
+                        <strong>판암 IC 경로:</strong><br>
+                        판암IC출구 → 옥천길[대전]방면으로 좌회전 → 옥천길 판암지구대 삼거리에서 용운동길 방면으로 우회전 →
+                        용운동길 사거리에서 [대전역/대동오거리] 방면으로 좌회전 → 용운 주공아파트2단지 사거리에서 좌회전 →
+                        백룡길 직진 → 대학로 네거리에서 직진 → 우송대학교 동 캠퍼스 직진 → 우송대학교 서 캠퍼스
+                    </p>
+                </div>
+
+                <div id="bus" class="tab-content" style="display:none; line-height: 1.6;">
+                    <p>
+                        <strong>고속버스터미널:</strong><br>
+                        102번: 고속버스 터미널에서 길 건너 버스정류장 탑승 → 한국화장품 앞 → 가양4거리 → 우송 서 캠퍼스(동문)입구 하차
+                    </p>
+
+                    <p>
+                        <strong>대전역:</strong><br>
+                        605번: 동광장역 탑승 → 대전역(중앙시장) → 대동역 → 우송예술회관 앞 하차<br>
+                        608번: 대전역 탑승 → 대동역 → 우송대삼거리 하차 → 도보 10분<br>
+                        102번: 대전역 탑승 → 원동4가 → 대동역 → 동문입구 하차<br>
+                        103번: 대전역 탑승 → 대동역 → 우송예술회관 앞 하차<br>
+                        311번: 대전역 탑승 → 원동4 → 대동역 → 서 캠퍼스 하차
+                    </p>
+
+                    <p>
+                        <strong>서부터미널:</strong><br>
+                        701번: 서부터미널 탑승 → 유천시장 → 서대전역네거리 → 대전역 환승<br>
+                        → 대전역/중앙시장에서 605번 승차 → 원동4가 → 대동역 → 서 캠퍼스 하차<br>
+                        608번: 서부터미널 탑승 → 유천시장 → 서대전역네거리 → 대전역 → 신흥초등학교입구 → 대동역 → 우송대삼거리 하차
+                    </p>
+                </div>
+            </div>
+            <div class="footer">
+                <img src="f_logo.png" class="flogo">
+                <div class="footer-text">
+                    (34606) 대전광역시 동구 동대전로 171 우송대학교 서캠퍼스 식품건축관(구.사회관)(W15) 202호<br>
+                    TEL 042.630.9850 / FAX 042-630-9719<br>
+                    COPYRIGHT 2020 WOOSONG UNIVERSITY ALL RIGHT RESERVED.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const toggleBtn = document.getElementById("toggle-search");
+        const searchBox = document.getElementById("search-box");
+
+        toggleBtn.addEventListener("click", function () {
+            if (searchBox.style.display === "none" || searchBox.style.display === "") {
+                searchBox.style.display = "flex";
+            } else {
+                searchBox.style.display = "none";
+            }
+        });
+        const tabs = document.querySelectorAll(".tab-btn");
+        const contents = document.querySelectorAll(".tab-content");
+
+        tabs.forEach(btn => {
+            btn.addEventListener("click", () => {
+                tabs.forEach(t => t.classList.remove("active"));
+                contents.forEach(c => c.style.display = "none");
+
+                btn.classList.add("active");
+                const tabId = btn.getAttribute("data-tab");
+                document.getElementById(tabId).style.display = "block";
+            });
+        });
+    </script>
+</body>
+</html>

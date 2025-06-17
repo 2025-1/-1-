@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자료실-학사일정</title>
+    <link rel="stylesheet" href="StyleSheet1.css">
+    <style>
+        .content {
+            padding: 30px 50px;
+            border-bottom: 1px solid #ccc;
+            color: #333;
+            line-height: 1.6;
+            position: relative;
+            display: flex;
+            gap: 30px; /* 달력과 일정 리스트 사이 간격 */
+            align-items: flex-start;
+        }
+
+        .calendar {
+            width: 500px;
+            margin-left: 40px; /* ← 왼쪽 여백을 주어 깔끔하게 */
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+            .calendar caption {
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                padding: 10px;
+            }
+
+            .calendar th,
+            .calendar thead th {
+                height: 40px;
+                line-height: 40px; /* 텍스트 세로 정렬용 */
+                font-weight: bold;
+            }
+            .calendar td {
+                width: calc(100% / 7);
+                height: 70px;
+                text-align: center;
+                vertical-align: top;
+                border: 1px solid #F3F3F3;
+                padding: 5px;
+            }
+
+            .calendar th {
+                background-color: #f2f2f2;
+                color: #333;
+            }
+
+            .calendar td {
+                background-color: #fff;
+            }
+
+                .calendar td:hover {
+                    background-color: #f9f9f9;
+                }
+
+                .calendar td.has-event {
+                    position: relative;
+                }
+
+                    .calendar td.has-event::after {
+                        content: "";
+                        position: absolute;
+                        bottom: 20px; /* 아래쪽에서 5px 떨어진 위치 */
+                        left: 50%; /* 가로 중앙에 위치시키기 */
+                        transform: translateX(-50%); /* 정확히 중앙 정렬 */
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 50%;
+                    }
+                        .calendar td.has-event.schedule::after {
+                            background-color: #2E4E8C; /* 네이비 (기존) */
+                        }
+
+                        .calendar td.has-event.exam::after {
+                            background-color: #9d2c42; /* 빨강 */
+                        }
+
+
+        .sunday {
+            color: red;
+        }
+
+        .saturday {
+            color: blue;
+        }
+
+        .underline {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .event-list {
+            flex: 1; /* 일정 리스트 영역 넓이 */
+            font-size: 16px;
+            color: #333;
+            background-color: #ffffff; /* 박스 배경색 */
+            padding: 20px;
+            border: 1px solid #f2f2f2;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+            margin-top: 40px; /* 버튼과 겹치지 않도록 위에 여백 */
+            height: 450px;
+            overflow-y: auto;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .event-list ul {
+                list-style: none; /* 기본 점 제거 */
+                padding-left: 0;
+            }
+
+            .event-list li {
+                position: relative;
+                padding-left: 25px; /* 점 넣을 공간 확보 */
+                margin-bottom: 12px;
+            }
+
+            .event-list .event-dot {
+                position: absolute;
+                left: 0;
+                top: 8px;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+            }
+
+                .event-list .event-dot.schedule {
+                    background-color: #2E4E8C;
+                }
+
+                .event-list .event-dot.exam {
+                    background-color: #9d2c42;
+                }
+        /* 버튼 컨테이너를 우상단에 배치 */
+        .view-toggle-buttons {
+            position: absolute;
+            top: 10px;
+            right: 50px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+            .view-toggle-buttons button {
+                padding: 8px 40px;
+                font-size: 14px;
+                cursor: pointer;
+                background: white;
+                color: #003366;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+                box-shadow: none;
+                font-weight: normal;
+            }
+
+                .view-toggle-buttons button:hover:not(:disabled) {
+                    background-color: #f0f0f0;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+
+                .view-toggle-buttons button:disabled {
+                    background: #f0f0f0;
+                    color: #003366;
+                    font-weight: bold;
+                    border: 1px solid #999999;
+                    box-shadow: 0 4px 6px rgba(100, 100, 100, 0.2);
+                    cursor: default;
+                }
+
+        .text-view {
+            display: none;
+            margin-left: 40px;
+            width: 1000px;
+            overflow-y: auto;
+            padding: 20px;
+            border: 1px solid #f2f2f2;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+            background-color: #ffffff;
+        }
+            .text-view h3 {
+                font-size: 1.4em;
+                color: #003366;
+                margin-bottom: 20px;
+            }
+
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+
+            .calendar-table td {
+                border: 1px solid #ccc;
+                vertical-align: top;
+                padding: 15px;
+            }
+
+            .calendar-table .month {
+                width: 120px;
+                font-weight: bold;
+                background-color: #f2f2f2;
+                text-align: center;
+            }
+
+            .calendar-table ul {
+                margin: 0;
+                padding-left: 20px;
+            }
+
+            .calendar-table li {
+                margin-bottom: 8px;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <img src="wsu_logo.png">
+
+            <div class="menu">
+                전공소개
+                <div class="submenu">
+                    <div>학부장 말씀</div>
+                    <div>전공 소개</div>
+                    <div>교수 소개</div>
+                    <div>관련 자격증</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                입학정보
+                <div class="submenu">
+                    <div>권장 도서</div>
+                    <div>입시 공지사항</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                커뮤니티
+                <div class="submenu">
+                    <div>최신 뉴스</div>
+                    <div>전공동아리</div>
+                    <div>공지사항</div>
+                    <div>학생 프로젝트</div>
+                    <div>익명게시판</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                자료실
+                <div class="submenu">
+                    <div>유학/인턴십</div>
+                    <div>졸업요건</div>
+                    <div>학사일정</div>
+                    <div>취업정보</div>
+                    <div>캠퍼스맵</div>
+                </div>
+            </div>
+
+            <div class="sns">
+                <a href="#" class="sns-item">
+                    <img src="insta_icon.png" alt="인스타">
+                </a>
+                <a href="#" class="sns-item">
+                    <img src="blog_icon.png" alt="블로그">
+                </a>
+                <a href="#" class="sns-item">
+                    <img src="youtube_icon.png" alt="유튜브">
+                </a>
+            </div>
+        </div>
+        <div class="main">
+            <div class="topbar">
+                <div class="sub"><span>학사일정</span></div>
+                <div class="floating-buttons">
+                    <button id="toggle-search" class="search-toggle">
+                        <img src="search.png" alt="검색">
+                    </button>
+                    <a href="#" class="login-btn">
+                        <img src="lock.png" alt="로그인">
+                    </a>
+                </div>
+                <div class="search" id="search-box">
+                    <input type="text" placeholder="검색어를 입력하세요">
+                    <button>검색</button>
+                </div>
+            </div>
+
+            <div class="content">
+
+                <!-- 여기 버튼 추가 -->
+                <div class="view-toggle-buttons">
+                    <button id="btnCalendar">월간 일정</button>
+                    <button id="btnText">연간 일정</button>
+                </div>
+
+                <!-- 달력 영역 -->
+                <div id="calendarView">
+                    <table class="calendar">
+                        <caption>2025년 6월</caption>
+                        <thead>
+                            <tr>
+                                <th class="sunday">일</th>
+                                <th>월</th>
+                                <th>화</th>
+                                <th>수</th>
+                                <th>목</th>
+                                <th>금</th>
+                                <th class="saturday">토</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="sunday">1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>6</td>
+                                <td class="saturday">7</td>
+                            </tr>
+                            <tr>
+                                <td class="sunday">8</td>
+                                <td>9</td>
+                                <td>10</td>
+                                <td class="has-event exam">11</td>
+                                <td class="has-event exam">12</td>
+                                <td>13</td>
+                                <td class="saturday">14</td>
+                            </tr>
+                            <tr>
+                                <td class="sunday">15</td>
+                                <td>16</td>
+                                <td class="has-event exam">17</td>
+                                <td class="has-event exam">18</td>
+                                <td>19</td>
+                                <td>20</td>
+                                <td class="saturday">21</td>
+                            </tr>
+                            <tr>
+                                <td class="sunday">22</td>
+                                <td class="has-event schedule">23</td> <!--일정있는날에 태그달기-->
+                                <td>24</td>
+                                <td>25</td>
+                                <td>26</td>
+                                <td>27</td>
+                                <td class="saturday">28</td>
+                            </tr>
+                            <tr>
+                                <td class="sunday">29</td>
+                                <td class="has-event schedule">30</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="saturday"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="event-list">
+                    <ul>
+                        <li><span class="event-dot exam"></span> 06.11 웹프로그래밍 002반 기말고사</li>
+                        <li><span class="event-dot exam"></span> 06.12 컴퓨터프로그래밍 001반 기말고사</li>
+                        <li><span class="event-dot exam"></span> 06.17 컴퓨터프로그래밍 002반 기말고사</li>
+                        <li><span class="event-dot exam"></span> 06.17 인공지능과컴퓨터 기말고사</li>
+                        <li><span class="event-dot exam"></span> 06.18 웹프로그래밍 001반 최종발표</li>
+                        <li><span class="event-dot schedule"></span> 06.23 여름학기 개강</li>
+                        <li><span class="event-dot schedule"></span> 06.30 - 07.04 성적정정 및 이의신청</li>
+                        <!--여기에 위쪽 형식 복사하여 해당 일정 상세하게 적기-->
+                    </ul>
+                </div>
+
+                <!-- 줄글 영역 (초기 숨김) -->
+                <div id="textView" class="text-view">
+                    <h3>2025년 학사일정</h3>
+
+                    <table class="calendar-table">
+                        <tr>
+                            <td class="month">01</td>
+                            <td>
+                                <ul>
+                                    <li>12/30~1/3 : 2학기 성적정정 및 이의신청 기간</li>
+                                    <li>1/6~10 : 1학기 전과 및 재입학 신청 기간</li>
+                                    <li>1/13~17 : 1학기 복학신청 기간</li>
+                                    <li>1/20~24 : 1학기 수강신청 및 일반휴학 신청 기간</li>
+                                    <li>1/24 : 겨울학기 종강</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="month">02</td>
+                            <td>
+                                <ul>
+                                    <li>2/3~7 : 겨울학기 성적입력 및 정정, 이의신청</li>
+                                    <li>2/10~12 : 1학기 수강신청 변경 기간</li>
+                                    <li>2/14 : 2024학년도 전기 학위수여식</li>
+                                    <li>2/24~28 : SolSup(신입생역량강화프로그램)</li>
+                                    <li>2/28 : 2025학년도 입학식</li>
+                                </ul>
+                            </td>
+                        <tr>
+                            <td class="month">03</td>
+                            <td>
+                                <ul>
+                                    <li>3/1 : 삼일절, 학기 개시일</li>
+                                    <li>3/3 : 대체공휴일(삼일절)</li>
+                                    <li>3/4 : 1학기 개강일</li>
+                                    <li>3/28 : 복학 신청 마감일</li>
+                                    <li>3/30 : 학기 개시 후 30일</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="month">04</td>
+                            <td>
+                                <ul>
+                                    <li>4/7 : 수업일수 1/3선</li>
+                                    <li>4/7~11 : 전기 학점포기 신청 기간</li>
+                                    <li>4/21~25 : 1차 수강소감설문 및 수시(중간)평가</li>
+                                    <li>4/25 : 수업일수 1/2</li>
+                                    <li>4/29 : 학기 개시 후 60일</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="month">05</td>
+                            <td>
+                                <ul>
+                                    <li>5/1 : 근로자의 날 (임시휴업)</li>
+                                    <li>5/5 : 어린이날</li>
+                                    <li>5/6 : 부처님오신날 대체공휴일</li>
+                                    <li>5/9 : 수강철회 신청 마감</li>
+                                    <li>5/12 : 수업일수 2/3</li>
+                                    <li>5/12~16 : 상반기 모의토익 원서접수</li>
+                                    <li>5/21~23 : 여름학기 수강신청</li>
+                                    <li>5/22~23 : 상반기 모의토익 시험</li>
+                                    <li>5/26~30 : 조기졸업/학사학위 유예 신청</li>
+                                    <li>5/29 : 학기 개시 후 90일</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="month">06</td>
+                            <td>
+                                <ul>
+                                    <li>6/3~9 : 졸업종합시험, 2차 수강소감설문, 2차 전공능력성취도 평가</li>
+                                    <li>6/10~16 : 1학기 정기평가</li>
+                                    <li>6/16 : 1학기 종강일</li>
+                                    <li>6/17~20 : 보강 기간</li>
+                                    <li>6/17~27 : 성적입력 및 공고 기간</li>
+                                    <li>6/23 : 여름학기 개강</li>
+                                    <li>6/30~7/4 : 성적정정 및 이의신청</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="month">07</td>
+                            <td>
+                                <ul>
+                                    <li>7/7~11 : 2학기 전과 및 재입학 신청</li>
+                                    <li>7/14~18 : 2학기 복학 신청</li>
+                                    <li>7/21~25 : 2학기 수강신청 및 일반휴학 신청</li>
+                                    <li>7/25 : 여름학기 종강</li>
+                                    <li>7/28~8/1 : 여름학기 성적입력 및 정정</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="month">08</td>
+                            <td>
+                                <ul>
+                                    <li>8/5~7 : 2학기 수강신청 변경</li>
+                                    <li>8/22 : 후기 학위수여식</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="month">09</td>
+                            <td>
+                                <ul>
+                                    <li>9/1 : 2학기 개강 및 학기 개시</li>
+                                    <li>9/8~12 : 1차 전공능력성취도 평가</li>
+                                    <li>9/26 : 복학 신청 마감</li>
+                                    <li>9/30 : 학기 개시 후 30일</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="month">10</td>
+                            <td>
+                                <ul>
+                                    <li>10/3 : 개천절</li>
+                                    <li>10/5 : 수업일수 1/3</li>
+                                    <li>10/6~8 : 추석연휴</li>
+                                    <li>10/9 : 한글날</li>
+                                    <li>10/13~17 : 후기 학점포기, 모의토익 원서접수</li>
+                                    <li>10/15 : 학원 창립기념일</li>
+                                    <li>10/20~24 : 1차 수강소감설문, 수시평가</li>
+                                    <li>10/23~24 : 모의토익 시험</li>
+                                    <li>10/23 : 수업일수 1/2</li>
+                                    <li>10/30 : 학기 개시 후 60일</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="month">11</td>
+                            <td>
+                                <ul>
+                                    <li>11/7 : 수강철회 마감</li>
+                                    <li>11/9 : 수업일수 2/3</li>
+                                    <li>11/24~28 : 조기졸업 및 학위유예 신청</li>
+                                    <li>11/26~28 : 겨울학기 수강신청</li>
+                                    <li>11/29 : 학기 개시 후 90일</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="month">12</td>
+                            <td>
+                                <ul>
+                                    <li>12/1~5 : 졸업종합시험, 복수전공/부전공 신청, 2차 수강소감설문</li>
+                                    <li>12/8~12 : 정기평가, 전공배정 신청</li>
+                                    <li>12/12 : 종강일</li>
+                                    <li>12/15~19 : 보강 기간</li>
+                                    <li>12/15~26 : 성적입력 및 공고</li>
+                                    <li>12/22 : 겨울학기 개강</li>
+                                    <li>12/29~1/2 : 성적정정 및 이의신청</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+</div>
+
+            </div>
+            <div class="footer">
+                <img src="f_logo.png" class="flogo">
+                <div class="footer-text">
+                    (34606) 대전광역시 동구 동대전로 171 우송대학교 서캠퍼스 식품건축관(구.사회관)(W15) 202호<br>
+                    TEL 042.630.9850 / FAX 042-630-9719<br>
+                    COPYRIGHT 2020 WOOSONG UNIVERSITY ALL RIGHT RESERVED.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const btnCalendar = document.getElementById('btnCalendar');
+        const btnText = document.getElementById('btnText');
+        const calendarView = document.getElementById('calendarView');
+        const textView = document.getElementById('textView');
+
+        btnCalendar.addEventListener('click', () => {
+            calendarView.style.display = 'block';   // flex → block or flex 상관 없음
+            document.querySelector('.event-list').style.display = 'block';
+
+            textView.style.display = 'none';
+
+            btnCalendar.disabled = true;
+            btnText.disabled = false;
+        });
+
+        btnText.addEventListener('click', () => {
+            calendarView.style.display = 'none';
+            document.querySelector('.event-list').style.display = 'none';
+
+            textView.style.display = 'block';
+
+            btnCalendar.disabled = false;
+            btnText.disabled = true;
+        });
+
+        // ✅ 초기 상태 설정
+        calendarView.style.display = 'flex';
+        textView.style.display = 'none';
+        btnCalendar.disabled = true;
+        btnText.disabled = false;
+    </script>
+
+</body>
+</html>
