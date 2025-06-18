@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>유학정보</title>
+    <link rel="stylesheet" href="StyleSheet1.css">
+    <style>
+        .content {
+            padding: 30px 50px;
+            border-bottom: 1px solid #ccc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+            .content h2 {
+                font-size: 28px;
+                margin-bottom: 15px;
+                color: #2a6592;
+            }
+
+            .content p {
+                margin-bottom: 15px;
+                font-size: 16px;
+            }
+
+            .content strong {
+                color: #115293;
+            }
+
+        .program-list {
+            margin-top: 25px;
+            padding-left: 20px;
+        }
+
+            .program-list li {
+                margin-bottom: 8px;
+                font-size: 15px;
+            }
+
+        .program-block {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+            .program-block h3 {
+                margin-bottom: 10px;
+                color: #1a3d7c;
+                font-weight: 700;
+            }
+
+            .program-block ul {
+                list-style: disc inside;
+            }
+
+        .program-inner {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .program-image {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .program-inner {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .program-image {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .program-info {
+            flex: 1;
+        }
+
+            .program-info h3 {
+                margin-top: 0;
+                margin-bottom: 10px;
+                color: #1a3d7c;
+                font-weight: 700;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <a href="../메인/메인.html">
+                    <img src="wsu_logo.png" alt="우송대 로고">
+                </a>
+            </div>
+
+            <div class="menu">
+                <div class="mainmenu">
+                    <div>전공소개</div>
+                </div>
+                <div class="submenu">
+                    <a href="../전공소개/학부장말씀.html">학부장 말씀</a>
+                    <a href="../전공소개/전공소개.html">전공 소개</a>
+                    <a href="../전공소개/교수소개.html">교수 소개</a>
+                    <a href="../전공소개/자격증.html">관련 자격증</a>
+                </div>
+
+            </div>
+
+            <div class="menu">
+                <div class="mainmenu">
+                    <div>입학정보</div>
+                </div>
+                <div class="submenu">
+                    <a href="../입학정보/권장도서.html">권장 도서</a>
+                    <a href="../입학정보/입학공지사항.html">입시 공지사항</a>
+                </div>
+
+            </div>
+
+            <div class="menu">
+                <div class="mainmenu">
+                    <div>커뮤니티</div>
+                </div>
+                <div class="submenu">
+                    <a href="../커뮤니티/커뮤_최신뉴스.html">최신 뉴스</a>
+                    <a href="../커뮤니티/커뮤_전공동아리.html">전공동아리</a>
+                    <a href="../커뮤니티/커뮤_공지사항.html">공지사항</a>
+                    <a href="../커뮤니티/커뮤_학생프로젝트.html">학생 프로젝트</a>
+                    <a href="../커뮤니티/커뮤_익명게시판.html">익명게시판</a>
+                </div>
+
+            </div>
+
+            <div class="menu">
+                <div class="mainmenu">
+                    <div>자료실</div>
+                </div>
+                <div class="submenu">
+                    <a href="../자료실/유학정보.html">유학정보</a>
+                    <a href="../자료실/졸업요건.html">졸업요건</a>
+                    <a href="../자료실/학사일정.html">학사일정</a>
+                    <a href="../자료실/취업정보.html">취업정보</a>
+                    <a href="../자료실/캠퍼스맵.html">캠퍼스맵</a>
+                </div>
+
+            </div>
+
+            <div class="sns">
+                <a href="https://www.instagram.com/wsu_sw/" class="sns-item">
+                    <img src="insta_icon.png" alt="인스타">
+                </a>
+                <a href="https://blog.naver.com/woosong-univ" class="sns-item">
+                    <img src="blog_icon.png" alt="블로그">
+                </a>
+                <a href="https://www.youtube.com/user/WoosongUniversity" class="sns-item">
+                    <img src="youtube_icon.png" alt="유튜브">
+                </a>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="topbar">
+                <div class="sub"><span>유학</span></div>
+                <div class="floating-buttons">
+                    <button id="toggle-search" class="search-toggle">
+                        <img src="search.png" alt="검색">
+                    </button>
+                    <a href="#" class="login-btn">
+                        <img src="lock.png" alt="로그인">
+                    </a>
+                </div>
+                <div class="search" id="search-box">
+                    <input type="text" placeholder="검색어를 입력하세요">
+                    <button>검색</button>
+                </div>
+            </div>
+            <div class="content">
+                <h2>해외연수</h2>
+                <p><strong>해외연수프로그램은 3+1 또는 2+2로 운영</strong></p>
+                <p>2+2 유학 프로그램은 우송대학교의 기본교육을 2년 동안 정규수업, 어학훈련 등 특별교육과 국내 사전교육을 실시한 후, 해외협력대학에 2년간 유학하여 해당국가의 졸업장을 취득함과 동시에 선진기술을 습득하는 제도입니다.</p>
+                <br>
+                <div class="program-block">
+                    <div class="program-inner">
+                        <img src="오카야마현립대학.png" alt="오카야마현립대학" class="program-image">
+                        <div class="program-info">
+                            <h3>오카야마현립대학</h3>
+                            <ul class="program-list">
+                                <li><strong>시기 :</strong> 1학년 2학기 모집 후 2학년 1학기 추가모집 / 3~4학년 연수</li>
+                                <li><strong>복수학위 :</strong> 2+2</li>
+                                <li><strong>현지 대학 교과과정 학점인정</strong></li>
+                                <li><strong>본교 수강신청등록금은 기본 납부</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="program-block">
+                    <div class="program-inner">
+                        <img src="북경이공대학.png" alt="북경이공대학" class="program-image">
+                        <div class="program-info">
+                            <h3>북경이공대학 (2.5+2) 공동학위 과정운영</h3>
+                            <ul class="program-list">
+                                <li><strong>시기 :</strong> 매년 2학기 (2.5년 : IT융합학부 + 2년 : 북경이공대학)</li>
+                                <li><strong>공동학위취득</strong></li>
+                                <li><strong>대학원과정 유학 :</strong> 등록금 전액 면제, 매달 생활비 지원</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-block">
+                    <div class="program-inner">
+                        <img src="St. Cloud State University.png" alt="세인트클라우드주립대학" class="program-image">
+                        <div class="program-info">
+                            <h3>St. Cloud State University</h3>
+                            <ul class="program-list">
+                                <li><strong>시기 :</strong> 매년 1, 2학기 (년 2회)</li>
+                                <li><strong>본교 수강신청 등록금은 기본 납부</strong></li>
+                                <li><strong>개인별 수강신청가능 학점 인정 :</strong> 2년간 최대 70학점</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <img src="f_logo.png" class="flogo">
+                <div class="footer-text">
+                    (34606) 대전광역시 동구 동대전로 171 우송대학교 서캠퍼스 식품건축관(구.사회관)(W15) 202호<br>
+                    TEL 042.630.9850 / FAX 042-630-9719<br>
+                    COPYRIGHT 2020 WOOSONG UNIVERSITY ALL RIGHT RESERVED.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById("toggle-search");
+        const searchBox = document.getElementById("search-box");
+
+        toggleBtn.addEventListener("click", function () {
+            if (searchBox.style.display === "none" || searchBox.style.display === "") {
+                searchBox.style.display = "flex";
+            } else {
+                searchBox.style.display = "none";
+            }
+        });
+        const tabButtons = document.querySelectorAll(".tab-btn");
+        const tabContents = document.querySelectorAll(".tab-content");
+
+        tabButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const tabId = button.getAttribute("data-tab");
+
+                tabButtons.forEach(btn => btn.classList.remove("active"));
+                tabContents.forEach(content => content.classList.remove("active"));
+
+                button.classList.add("active");
+                document.getElementById(tabId).classList.add("active");
+            });
+        });
+    </script>
+</body>
+</html>
