@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>졸업요건</title>
+    <link rel="stylesheet" href="StyleSheet1.css">
+    <style>
+        .content {
+            padding: 30px 50px;
+            border-bottom: 1px solid #ccc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .graduation-info {
+            max-width: 960px;
+            margin: 0 auto 40px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            font-size: 18px;
+            line-height: 1.8;
+            color: #2c2c2c;
+            text-align: center;
+        }
+
+            .graduation-info strong {
+                color: #2a6592;
+            }
+
+        .graduation-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .requirement-box {
+            background: #ffffff;
+            padding: 30px 32px;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .requirement-box:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 20px rgba(0, 119, 204, 0.1);
+            }
+
+            .requirement-box h2 {
+                font-size: 22px;
+                color: #1a3d7c;
+                border-bottom: 2px solid #e0e0e0;
+                padding-bottom: 12px;
+                margin-bottom: 20px;
+            }
+
+            .requirement-box p,
+            .requirement-box li {
+                font-size: 16px;
+                line-height: 1.8;
+                color: #444;
+            }
+
+            .requirement-box ul {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            .requirement-box li {
+                position: relative;
+                padding-left: 26px;
+                margin-bottom: 14px;
+            }
+
+                .requirement-box li p {
+                    content: none;
+                    position: relative;
+                    padding-left: 200px;
+                    margin-bottom: 14px;
+                }
+
+                .requirement-box li::before {
+                    content: '▶';
+                    position: absolute;
+                    left: 0;
+                    color: #1a3d7c;
+                    font-weight: bold;
+                }
+
+            .requirement-box li strong {
+                color: #1a3d7c; /* 강조색변경 */
+                font-weight: bold;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <a href="../메인/메인.html">
+                    <img src="wsu_logo.png" alt="우송대 로고">
+                </a>
+            </div>
+
+            <div class="menu">
+                <div class="mainmenu">
+                    <div>전공소개</div>
+                </div>
+                <div class="submenu">
+                    <a href="../전공소개/학부장말씀.html">학부장 말씀</a>
+                    <a href="../전공소개/전공소개.html">전공 소개</a>
+                    <a href="../전공소개/교수소개.html">교수 소개</a>
+                    <a href="../전공소개/자격증.html">관련 자격증</a>
+                </div>
+
+            </div>
+
+            <div class="menu">
+                <div class="mainmenu">
+                    <div>입학정보</div>
+                </div>
+                <div class="submenu">
+                    <a href="../입학정보/권장도서.html">권장 도서</a>
+                    <a href="../입학정보/입학공지사항.html">입시 공지사항</a>
+                </div>
+
+            </div>
+
+            <div class="menu">
+                <div class="mainmenu">
+                    <div>커뮤니티</div>
+                </div>
+                <div class="submenu">
+                    <a href="../커뮤니티/커뮤_최신뉴스.html">최신 뉴스</a>
+                    <a href="../커뮤니티/커뮤_전공동아리.html">전공동아리</a>
+                    <a href="../커뮤니티/커뮤_공지사항.html">공지사항</a>
+                    <a href="../커뮤니티/커뮤_학생프로젝트.html">학생 프로젝트</a>
+                    <a href="../커뮤니티/커뮤_익명게시판.html">익명게시판</a>
+                </div>
+
+            </div>
+
+            <div class="menu">
+                <div class="mainmenu">
+                    <div>자료실</div>
+                </div>
+                <div class="submenu">
+                    <a href="../자료실/유학정보.html">유학정보</a>
+                    <a href="../자료실/졸업요건.html">졸업요건</a>
+                    <a href="../자료실/학사일정.html">학사일정</a>
+                    <a href="../자료실/취업정보.html">취업정보</a>
+                    <a href="../자료실/캠퍼스맵.html">캠퍼스맵</a>
+                </div>
+
+            </div>
+
+            <div class="sns">
+                <a href="https://www.instagram.com/wsu_sw/" class="sns-item">
+                    <img src="insta_icon.png" alt="인스타">
+                </a>
+                <a href="https://blog.naver.com/woosong-univ" class="sns-item">
+                    <img src="blog_icon.png" alt="블로그">
+                </a>
+                <a href="https://www.youtube.com/user/WoosongUniversity" class="sns-item">
+                    <img src="youtube_icon.png" alt="유튜브">
+                </a>
+            </div>
+        </div>
+        <div class="main">
+            <div class="topbar">
+                <div class="sub"><span>졸업요건</span></div>
+                <div class="floating-buttons">
+                    <button id="toggle-search" class="search-toggle">
+                        <img src="search.png" alt="검색">
+                    </button>
+                    <a href="#" class="login-btn">
+                        <img src="lock.png" alt="로그인">
+                    </a>
+                </div>
+                <div class="search" id="search-box">
+                    <input type="text" placeholder="검색어를 입력하세요">
+                    <button>검색</button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="graduation-info">
+                    <p>
+                        <strong>※ 2025년 입학생부터 해당</strong><br />
+                        <strong>필수요건 전부</strong>와 <strong>선택요건 중 1개 이상</strong>을 만족해야 합니다.
+                    </p>
+                </div>
+                <div class="graduation-container">
+                    <div class="requirement-box">
+                        <h2>📌 필수요건</h2>
+                        <ul>
+                            <li>중점전공 영역에서 <strong>최소 12학점</strong> 이상 취득</li>
+                            <br>
+                            <li>캡스톤디자인1, 2 중 <strong>1개 이상 이수</strong></li>
+                            <br>
+                            <li><strong>TOPCIT 시험 2회 이상 응시</strong></li>
+                            <br>
+                            <li><strong>우송 비트특별교육과정(단기과정)</strong> 이수</li>
+                            <br>
+                            <li><strong>Codessey</strong> 또는 <strong>비트고급과정</strong> 1개 이상 이수</li>
+                        </ul>
+                    </div>
+                    <div class="requirement-box">
+                        <h2>✅ 선택요건</h2>
+                        <ul>
+                            <li>
+                                <strong>자격증 취득</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><a href="../전공소개/자격증.html">[자격증 정보]</a></strong><br />
+                                - 전공 관련 기사자격(예: 정보처리기사, 정보보안기사) 중 1개 이상<br />
+                                - 전공 관련 국제공인자격증(CCNA, OCP 등) 중 1개 이상<br />
+                                - 또는 학부 전공평가위원회 인정 자격증 2개 이상
+                            </li>
+                            <li></li>
+                            <li><strong>TOPCIT 성적 300점 이상</strong> 취득</li>
+                            <li>※ 2024년 이전 입학생은 <strong>학과 지정 특별과제 수행</strong> 가능</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <img src="f_logo.png" class="flogo">
+                <div class="footer-text">
+                    (34606) 대전광역시 동구 동대전로 171 우송대학교 서캠퍼스 식품건축관(구.사회관)(W15) 202호<br>
+                    TEL 042.630.9850 / FAX 042-630-9719<br>
+                    COPYRIGHT 2020 WOOSONG UNIVERSITY ALL RIGHT RESERVED.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
